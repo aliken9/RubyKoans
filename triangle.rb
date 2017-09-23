@@ -14,7 +14,23 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  edgeArray = [a, b, c]
+
+  # Check for postive edges
+  edgeArray.each {|x| raise TriangleError if x <= 0}
+
+  # Check for minimum allowed edges
+  copy = edgeArray.clone
+  compare = copy.delete_at(copy.index(copy.min))
+  raise TriangleError if compare <= copy.max - copy.min
+
+  # Detect triangle type
+  return case edgeArray.uniq.size
+    when 1; :equilateral
+    when 2; :isosceles
+    when 3; :scalene
+    else raise TriangleError
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
