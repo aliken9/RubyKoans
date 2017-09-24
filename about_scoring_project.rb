@@ -38,7 +38,7 @@ def score(dice)
       score += roll_num == 1 ? 1000 : roll_num * 100
       count -= 3
     end
-    # going through some extra cycles here but atleast code is DRY
+    # going through some extra checks (2-4 rolls) here but atleast code is DRY
     score += count * (roll_num == 1 ? 100 : 50) if [1, 5].include?(roll_num)
   end
   score
