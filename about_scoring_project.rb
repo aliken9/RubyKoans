@@ -32,14 +32,15 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 def score(dice)
   # You need to write this method
   score = 0
-  hashFrequency = dice.each_with_object(Hash.new(0)){|roll_num, hash| hash[roll_num] += 1}
-  hashFrequency.each do |roll_num, count|
+  frequency = dice.each_with_object(Hash.new(0)){|roll_num, hash| hash[roll_num] += 1}
+  frequency.each do |roll_num, count|
     if count >= 3
       score += roll_num == 1 ? 1000 : roll_num * 100
       count -= 3
     end
-    # going through some extra checks (2-4 rolls) here but atleast code is DRY
-    score += count * (roll_num == 1 ? 100 : 50) if [1, 5].include?(roll_num)
+    next if roll_num.between?(2, 4)
+    score += count * 100 if roll_num == 1
+    score += count * 50 if roll_num == 5
   end
   score
 end

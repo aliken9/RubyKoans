@@ -10,8 +10,7 @@ class DiceSet
   attr_reader :values
 
   def roll(dice_count)
-    @values = []
-    dice_count.times { @values << 1 + rand(6) }
+    @values = Array.new(dice_count) {1 + rand(6)}
   end
 end
 
