@@ -16,18 +16,19 @@
 def triangle(a, b, c)
   edges = [a, b, c]
 
-  raise TriangleError unless edges.all?(&:positive?)
-  minimum_allowed_edges_check(edges)
+  check_triangle_edges(edges)
 
   case edges.uniq.size
     when 1; :equilateral
     when 2; :isosceles
     when 3; :scalene
-    else raise "Unreachable"
+    else raise "Unreachable, expecting 1-3 unique edges, but got " + edges.uniq.size
   end
 end
 
-def minimum_allowed_edges_check(edges)
+def check_triangle_edges(edges)
+  raise TriangleError unless edges.all?(&:positive?)
+
   sorted = edges.sort
   raise TriangleError if sorted[0] <= sorted[2] - sorted[1]
 end

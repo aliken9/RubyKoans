@@ -38,7 +38,6 @@ def score(dice)
       score += roll_num == 1 ? 1000 : roll_num * 100
       count -= 3
     end
-    next if roll_num.between?(2, 4)
     score += count * 100 if roll_num == 1
     score += count * 50 if roll_num == 5
   end
